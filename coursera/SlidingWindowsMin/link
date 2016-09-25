@@ -1,0 +1,5 @@
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=200776&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26sortid%3D311
+
+给一个int  array 和 windoW大小x, 求［每个window中的最小值］中的最大值。
+例如 ［1，2，3，4］，x=1 输出4
+［1，2，3，4］，x= 3 输出 2

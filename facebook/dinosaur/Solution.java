@@ -10,33 +10,40 @@ class Solution{
 
 	public void printRank() throws IOException{
 			String curPath = new File("").getAbsolutePath();
-			Scanner scanner = new Scanner(new File(curPath+"/battership.csv"));
 			
-			HashMap<String, Dinosaur> map = new HashMap<>(); 
+			HashMap<String, Integer> strideLenMap = new HashMap<>(); 
 			PriorityQueue<Dinosaur> queue = new PriorityQueue<>(new DinosaurComparator());
-
+			Scanner scanner = null;
 			try{
 				//skip 1st line
+				scanner = new Scanner(new File(curPath+"/battership.csv"));			
 				scanner.nextLine();
 				while(scanner.hasNextLine()){
 					String[] attrs = scanner.nextLine().split(",");
 					if(attrs[2].equals("A")){
-						Dinosaur dinosaur = new Dinosaur(attrs[0].trim(), Integer.valueOf(attrs[1]) );
-						map.put(attrs[0], dinosaur);
+						String name = attrs[0].trim();
+						int legLen = Integer.valueOf(attrs[1]);
+						//System.out.println(name);
+
+						strideLenMap.put(name, legLen);
 					}				
 				}
 
 				
 				scanner = new Scanner(new File(curPath+"/Habit.csv"));
 				scanner.nextLine();
+				
 				while(scanner.hasNextLine()){
 					String[] attrs = scanner.nextLine().split(",");
-					Dinosaur dinosaur = map.get(attrs[0].trim());
-					if(dinosaur != null){
-						dinosaur.legLength = Integer.parseInt(attrs[1]);
+					String name = attrs[0].trim();
+					if(strideLenMap.containsKey(name)){
+						int strideLen = strideLenMap.get(name);
+						int legLen = Integer.parseInt(attrs[1]);
+						Dinosaur dinosaur = new Dinosaur(name, strideLen, legLen);							
 						queue.offer(dinosaur);
 					}
 				}
+				
 			}finally{
 				if(scanner !=null){
 					scanner.close();
@@ -56,9 +63,10 @@ class Solution{
 		int strideLength;
 		int legLength;
 
-		public Dinosaur(String myName, int mystrideLength){
-			name = myName;
-			strideLength = mystrideLength;
+		public Dinosaur(String name, int strideLength, int legLength){
+			this.name = name;
+			this.strideLength = strideLength;
+			this.legLength = legLength;
 		}
 
 		public int getSpeed(){

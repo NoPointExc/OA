@@ -51,6 +51,7 @@ class Solution{
 	WordComparator comparator;
 	PriorityQueue<String> rankQueue;
 
+	// comparator input here
 	public Ranker(){
 	    comparator = new WordComparator();
 	    rankQueue = new PriorityQueue<>(comparator);
@@ -74,7 +75,6 @@ class Solution{
 
 	    return rankList;
 	}
-
     }
 
     class WordComparator implements Comparator<String>{
@@ -110,8 +110,6 @@ class Solution{
     public static void main(String[] args) {
 	Solution s = new Solution();
 	try{
-	    //List<String> rank = s.getRank("1 1 9 1 1 1 2 2 2 2 4 4 4 9");
-	    //List<String> rank = s.getRank(null);
 	    List<String> rank = s.getRankFromFile("text");
 	    System.out.println(rank);
 	}catch(IOException e){
